@@ -1,0 +1,8 @@
+
+*.v2
+*.v1
+.vs/AlgorytmSeidla/v17/.suo
+*.dll
+*.pdb
+*.cache
+*.txt
