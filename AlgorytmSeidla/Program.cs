@@ -17,14 +17,14 @@ class Program
         InitializeProgram(out limitations, out goalFunction, out range);
         var isMaxFunction = false;
         ReverseVectorIfIsMinimum(goalFunction, isMaxFunction);
-        var result = Seidel(limitations, goalFunction, isMaxFunction);
+        var result = Seidel(limitations, goalFunction);
         for (int i = 0; i < result.Count; i++)
         {
             Console.WriteLine($"x_{i}: {Math.Round(result[i], 2)}");
         }
     }
 
-    private static DenseVector<double> Seidel(List<Limitation> limitations, List<double> goalFunction, bool isMaxFunction)
+    private static DenseVector<double> Seidel(List<Limitation> limitations, List<double> goalFunction)
     {
         var limitationsCount = limitations.Count;
         var goalFunctionCount = goalFunction.Count;
@@ -59,7 +59,7 @@ class Program
                 }
             }
             //Wyliczamy x* z nowych ograniczeń (bez ograniczenia "zabranego" do h)
-            var result = Seidel(newLimitations, goalFunction, isMaxFunction);
+            var result = Seidel(newLimitations, goalFunction);
 
             if(result == null)
             {
@@ -74,7 +74,7 @@ class Program
             else
             {
                 limitations[randomValue].ConstraintType = ConstraintType.Equal;
-                return Seidel(limitations, goalFunction, isMaxFunction);
+                return Seidel(limitations, goalFunction);
             }
 
         }
